@@ -7,18 +7,14 @@ import java.util.regex.Pattern;
 
 public class ValidatorUtil {
 
-    private static final Pattern mobile_pattern = Pattern.compile("1\\d{10}");
+    private static final Pattern mobild_pattern = Pattern.compile("1\\d{10}");
 
-    public static boolean isMobile(String src) {
-        if (StringUtils.isEmpty(src)) {
+    public static boolean isMobile(String mobile) {
+        if (StringUtils.isEmpty(mobile)) {
             return false;
+        } else {
+            Matcher m = mobild_pattern.matcher(mobile);
+            return m.matches();
         }
-        Matcher m = mobile_pattern.matcher(src);
-        return m.matches();
     }
-
-//	public static void main(String[] args) {
-//			System.out.println(isMobile("18912341234"));
-//			System.out.println(isMobile("1891234123"));
-//	}
 }

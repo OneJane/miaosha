@@ -56,3 +56,5 @@ chkconfig --list | grep redis
 systemctl status/start/stop redis_6379
 redis-cli
 auth 123456
+
+http://127.0.0.1:8888/login/to_login  13000000000/123456 登录测试

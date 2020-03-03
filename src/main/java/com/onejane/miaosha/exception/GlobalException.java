@@ -13,6 +13,7 @@ public class GlobalException extends RuntimeException {
         this.cm = cm;
     }
 
+
     public CodeMsg getCm() {
         return cm;
     }

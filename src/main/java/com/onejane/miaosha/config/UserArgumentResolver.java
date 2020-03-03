@@ -22,8 +22,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     MiaoshaUserService userService;
 
     public boolean supportsParameter(MethodParameter parameter) {
-        Class<?> clazz = parameter.getParameterType();
-        return clazz == MiaoshaUser.class;
+        Class<?> clazz = parameter.getParameterType(); // 获取参数类型
+        return clazz == MiaoshaUser.class;  // 对应com.onejane.miaosha.controller.GoodsController.list接口参数MiaoshaUser user
     }
 
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
@@ -31,8 +31,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
 
-        String paramToken = request.getParameter(MiaoshaUserService.COOKI_NAME_TOKEN);
-        String cookieToken = getCookieValue(request, MiaoshaUserService.COOKI_NAME_TOKEN);
+        String paramToken = request.getParameter(MiaoshaUserService.COOKIE_NAME_TOKEN);
+        String cookieToken = getCookieValue(request, MiaoshaUserService.COOKIE_NAME_TOKEN);
         if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
             return null;
         }
