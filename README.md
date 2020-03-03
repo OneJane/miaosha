@@ -1,15 +1,49 @@
 # 总结
 ## 项目框架搭建
 1. Spring Boot 环境搭建
+  DemoController.java
+  MainApplication.java
+  application.properties
+  pom.xml
 2. 集成Thymeleaf, Result结果封装
+  CodeMsg.java
+  Result.java
+  application.properties
+  hello.html
+  pom.xml
 3. 集成MyBatis+Druid
+  UserDao.java
+  UserService.java
+  application.properties
+  pom.xml
+  SampleController.java
 4. 集成Jedis+Redis安装+通用缓存Key封装
+  RedisConfig.java
+  RedisPoolFactory.java
+  RedisService.java
+  
+  BasePrefix.java
+  KeyPrefix.java
+  UserKey.java
+  SampleController.java
 
 ## 登录功能
 1. 明文密码两次MD5处理（明文+固定salt->用户输入+随机salt）
+  MD5Util.java
 2. JSR303参数检验+全局异常处理器(接口的异常, 还未写页面异常)
+  GlobalException.java
+  GlobalExceptionHandler.java
+  LoginVo.java
+  IsMobile.java
+  IsMobileValidator.java
+  ValidatorUtil.java
 3. 分布式Session
-
+  LoginController.java
+  GoodsController.java
+  UserArgumentResolver.java
+  WebConfig.java
+  MiaoshaUserService.java
+  UUIDUtil.java
 ## 秒杀功能
 1. 商品列表页 (页面缓存)
 2. 商品详情页 (url缓存/前后端分离)

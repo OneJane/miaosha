@@ -27,8 +27,8 @@ public class CodeMsg {
     public static CodeMsg ORDER_NOT_EXIST = new CodeMsg(500401, "订单不存在");
 
     //秒杀模块 5005xx
-    public static CodeMsg Miao_SHA_OVER = new CodeMsg(500501, "秒杀结束!");
-    public static CodeMsg Miao_SHA_REPEAT = new CodeMsg(500502, "重复秒杀!");
+    public static CodeMsg MIAO_SHA_OVER = new CodeMsg(500501, "秒杀结束!");
+    public static CodeMsg REPEATE_MIAOSHA = new CodeMsg(500502, "重复秒杀!");
 
     private CodeMsg() {
     }
