@@ -38,7 +38,7 @@ public class MiaoshaController {
 
 	/**
 	 * 2000*10
-	 * QPS 1588 存在卖超情况
+	 * QPS:1306 存在卖超情况
 	 * @param model
 	 * @param user
 	 * @param goodsId
