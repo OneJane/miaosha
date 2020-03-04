@@ -108,7 +108,7 @@ http://127.0.0.1:8888/login/to_login  13000000000/123456 登录测试
 线程组-配置原件-CSV Data Set Config：																										 多个token配置
     Filename C:\Users\JDD\Desktop\config.txt   内容13000000000,57c78d16b6704a9f8f0a357b28b097a6
 	Variable Names(comma-delimited) userId,userToken
-	Delimiter(use '\t' for tab)
+	Delimiter(use '\t' for tab) ,
 	修改用户信息中参数为 token ${userToken}
 执行查看图形结果的qps	
 
@@ -119,4 +119,70 @@ redis-benchmark -h 127.0.0.1 -p 6379 -q -n 100000 -t set,lpush  指定方法请�
 redis-benchmark -h 127.0.0.1 -p 6379 -q -n 100000 script load "redis.call('set','foo','bar')"  指定命令请求
 
 ## 命令行压测
+
+``` gherkin
+<packaging>war</packaging>
+<build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+@SpringBootApplication
+public class MainApplication extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+    }
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MainApplication.class);
+    }
+}
+```
 mvn clean package 获得miaosha.war
+
+``` dts
+<packaging>jar</packaging>
+<build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+@SpringBootApplication
+public class MainApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+    }
+}
+```
+mvn clean package 获得miaosha.jar
+nohup java -jar miaosha.jar &
+http://10.33.72.81:8888/goods/to_list
+配置线程组5000-0-10
+UserUtil 生成tokens.txt
+配置CSV Data Set Config 
+Filename C:\Users\JDD\Desktop\tokens.txt
+Variable Names(comma-delimited) userId,userToken
+Delimiter(use '\t' for tab)
+
+配置商品秒杀HTTP请求
+goodsId 1
+token ${userToken}
+上传miaosha.jmx时修改miaosha.jmx中路径
+<stringProp name="filename">C:\Users\JDD\Desktop\tokens.txt</stringProp>
+<stringProp name="filename">C:\Users\JDD\Desktop\result.jtl</stringProp> 
+sh apache-jmeter-3.2/bin/jmeter.sh -n -t miaosha.jmx -l result.jtl 打开聚合报告-浏览-result.jtl
