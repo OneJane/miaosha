@@ -65,6 +65,7 @@
 1. 秒杀接口地址隐藏
 2. 接口防刷
 
+# 环境安装
 tar zxf redis-4.0.2.tar.gz
 mv redis-4.0.2 /usr/local/redis
 cd /usr/local/redis/ && make
@@ -92,3 +93,30 @@ redis-cli
 auth 123456
 
 http://127.0.0.1:8888/login/to_login  13000000000/123456 登录测试
+
+# 压测
+## 商品列表
+测试计划-添加线程组-2000线程0秒内循环10次
+线程组-配置元件-添加http请求默认值：http localhost 8888
+线程组-sampler-http请求：get /goods/to_list
+线程组-监听器-聚合报告，图形结果，用表格查看结果，聚合报告中的Throughput表示qps
+执行->linux top 查看 mysql排名靠上
+## 用户信息
+商品列表-禁用
+线程组-sampler-http请求：get /user/info - Parameters 添加 token:57c78d16b6704a9f8f0a357b28b097a6   单个token配置
+
+线程组-配置原件-CSV Data Set Config：																										 多个token配置
+    Filename C:\Users\JDD\Desktop\config.txt   内容13000000000,57c78d16b6704a9f8f0a357b28b097a6
+	Variable Names(comma-delimited) userId,userToken
+	Delimiter(use '\t' for tab)
+	修改用户信息中参数为 token ${userToken}
+执行查看图形结果的qps	
+
+## redis压测
+redis-benchmark -h 127.0.0.1 -p 6379 -c 100 -n 100000　开启100个并发共10万个请求
+redis-benchmark -h 127.0.0.1 -p 6379 -q -d 100  开启100个字节的快速请求
+redis-benchmark -h 127.0.0.1 -p 6379 -q -n 100000 -t set,lpush  指定方法请求
+redis-benchmark -h 127.0.0.1 -p 6379 -q -n 100000 script load "redis.call('set','foo','bar')"  指定命令请求
+
+## 命令行压测
+mvn clean package 获得miaosha.war
