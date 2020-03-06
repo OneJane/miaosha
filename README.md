@@ -54,9 +54,11 @@
 
 
 2. 页面静态化, 前后端分离
-
+u_uid_gid	user_id, order_id 唯一索引防止重复插入com.onejane.miaosha.service.OrderService#createOrder 解决卖超
 
 3. 静态资源优化
+js/css 压缩，减少流量，多个js/css组合，减少连接数，cdn就近访问
+
 4. CDN优化(3, 4 未涉及)
 
 ## 接口优化
